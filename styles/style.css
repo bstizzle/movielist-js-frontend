@@ -1,5 +1,7 @@
 
-.container-fluid {
+
+/* Tried css gen, not really working */
+/* .container-fluid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(5, 1fr);
@@ -7,7 +9,7 @@
     grid-row-gap: 20px;
     border: 1px solid black;
 }
-    
+
 .nav-bar { 
     grid-area: 1 / 1 / 2 / 6; 
     border: 1px solid black
@@ -17,4 +19,66 @@
     border: 1px solid black;}
 .watchlist { 
     grid-area: 2 / 5 / 5 / 6; 
-    border: 1px solid black;}
+    border: 1px solid black;} */
+
+/* -------------------------------- */
+
+/* Page view sections */
+div.card {
+    background-color: #eeeeee;
+    height: 150px;
+    width: 250px;
+    /* box-shadow: 10px 10px grey; */
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+body {
+margin: 0;
+padding: 0;
+display: grid;
+grid-template-areas: 
+    "header header header header"
+    "nav nav nav nav"
+    "main main watchlist watchlist"
+    "main main watchlist watchlist"
+    ;
+    
+grid-template-columns: 300px 1fr;
+grid-template-rows: 80px 1fr;
+row-gap: 10px;
+column-gap: 15px;
+}
+
+header {
+    grid-area: header;
+    border: 2px solid red;
+}
+
+main {
+    grid-area: main;
+    border: 2px solid blue;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+
+.nav-bar {
+    grid-area: nav;
+    border: 2px solid green;
+}
+
+.watchlist {
+    grid-area: watchlist;
+    border: 2px solid orange;
+}
+
+/* .movies-container {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin: auto 0
+} */
+
+
