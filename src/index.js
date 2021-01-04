@@ -86,16 +86,67 @@ const renderWatchlist = (userId) => {
             unwatched.innerHTML = ''
             user.user_movies.forEach(element => {
                 let li = document.createElement("li")
+                li.dataset.userMovieId = element.id
                 li.innerText = element.movie.title
+                li.addEventListener('click', event => {
+                    main.innerHTML = ''
+                    renderSelectedMovie(element.movie.id)
+                })
+
                 if(element.watched === true){
                     watched.append(li)
                 } else {
+                    let btn = document.createElement("button")
+                        btn.innerText = 'Watched'
+                        btn.className = 'edit-btn'
+                    let removeBtn = document.createElement("button")
+                        removeBtn.textContent = "Remove"
+                        removeBtn.className = 'delete-btn'
+                    li.append(btn, removeBtn)
                     unwatched.append(li)
+                    li.addEventListener('click', event => {
+                        if(event.target.matches('.edit-btn')){
+                            boolSwitch(event)
+                        } else if (event.target.matches(".delete-btn")) {
+                            removeMovie(event)
+                        }
+                    })
                 }
             })
         })
 }
 
+const boolSwitch = (event) => {
+    console.log(event.target)
+    let id = event.target.parentElement.dataset.userMovieId
+    fetch(`http://localhost:3000/user_movies/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            },
+        body: JSON.stringify({
+            watched: true
+        })
+    })
+        .then(resp => resp.json())
+        .then(newUserMovieObj => {
+            renderWatchlist(userId)
+        })
+}
+
+const removeMovie = (event) => {
+    let id = event.target.parentElement.dataset.userMovieId
+    fetch(`http://localhost:3000/user_movies/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            }
+    })
+        .then(resp => resp.json())
+        .then(newUserMovieObj => {
+            renderWatchlist(userId)
+        })
+}
 
 //******  Event Listeners  ******//
 
@@ -118,17 +169,42 @@ main.addEventListener('click', event => {
 
 login.addEventListener("submit", event => {
     event.preventDefault()
-    //console.log(event.target)
-    let user = event.target.username.value
-    allUsers.forEach(element => {
-        if(element.username === user){
-            console.log(element.id)
-            userId = element.id
-            renderWatchlist(userId)
+    let lgnBtn = document.querySelector(".login-button")
+    if(lgnBtn.value === "Login") {
+        console.log(event.target)
+        let user = event.target.username.value
+        allUsers.forEach(element => {
+            if(element.username === user){
+                console.log(element.id)
+                userId = element.id
+                alert("Logged In!")
+                renderWatchlist(userId)
+            }
+        })
+        if(userId === 0){
+            fetch(`http://localhost:3000/users`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    },
+                body: JSON.stringify({
+                    username: event.target.username.value
+                })
+            })
+                .then(resp => resp.json())
+                .then(newUser => {
+                    userId = newUser.id
+                    alert("No user with that name, created new account for you :)")
+                    renderWatchlist(userId)
+                })
         }
-    })
-    if(userId === 0){
-        event.target.username.value = "No user with that name"
+        lgnBtn.value = "Logout"
+    } else if(lgnBtn.value === "Logout") {
+        userId = 0
+        alert("Logged Out!")
+        unwatched.innerHTML = ''
+        watched.innerHTML = ''
+        lgnBtn.value = "Login"
     }
 })
 
@@ -181,7 +257,7 @@ const fetchUsers = () => {
         .then(usersArray => {
             console.log(usersArray)
             allUsers = usersArray
-        } )
+        })
 }
 
 const fetchUserMovies = () => {
@@ -190,13 +266,9 @@ const fetchUserMovies = () => {
         .then(userMoviesArray => {
             console.log(userMoviesArray)
             allUserMovies = userMoviesArray
-        } )
+        })
 }
 
 fetchMovies();
 fetchUsers();
 fetchUserMovies();
-
-//IF statement
-//if clicking on a movie from index, overwright with just the selected movie
-//if clicking on enlarged movie, overwright with whole movie index
