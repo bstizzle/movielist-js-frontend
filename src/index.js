@@ -11,7 +11,8 @@ let allUserMovies = []
 const main = document.querySelector("main")
 const login = document.querySelector(".login")
 const watchlist = document.querySelector(".watchlist")
-const watchUl = document.querySelector(".watchUl")
+const unwatched = document.querySelector(".unwatched")
+const watched = document.querySelector(".watched")
 
 //******  Functions  ******//
 
@@ -43,6 +44,7 @@ const renderSelectedMovie = (movieId) => {
 
     let movieDiv = document.createElement("div")
         movieDiv.className = ("selectedMov")
+        movieDiv.dataset.movieId = movieId
     let header = document.createElement("h1")
         header.textContent = movie.title
     let img = document.createElement("img")
@@ -60,9 +62,19 @@ const renderSelectedMovie = (movieId) => {
     let backButton = document.createElement("button")
         backButton.className = 'back-button'
         backButton.textContent = "Back"
+    let buttonDiv = document.createElement("div")
+        buttonDiv.className = "button-div"
+    let watchedButton = document.createElement("button")
+        watchedButton.className = "watched-button"
+        watchedButton.textContent = "Watched"
+    let wantButton = document.createElement("button")
+        wantButton.className = "want-button"
+        wantButton.textContent = "Want to Watch"
+    buttonDiv.addEventListener("click", addMovie)
 
     ul.append(liDesc, liYear, liGenre)
-    movieDiv.append(backButton, header, img, ul)
+    buttonDiv.append(watchedButton, wantButton)
+    movieDiv.append(backButton, header, img, ul, buttonDiv)
     main.append(movieDiv)
 }
 
@@ -70,10 +82,16 @@ const renderWatchlist = (userId) => {
     fetch(`http://localhost:3000/users/${userId}`)
         .then(resp => resp.json())
         .then(user => {
-            user.movies.forEach(element => {
+            watched.innerHTML = ''
+            unwatched.innerHTML = ''
+            user.user_movies.forEach(element => {
                 let li = document.createElement("li")
-                li.innerText = element.title
-                watchUl.append(li)
+                li.innerText = element.movie.title
+                if(element.watched === true){
+                    watched.append(li)
+                } else {
+                    unwatched.append(li)
+                }
             })
         })
 }
@@ -113,6 +131,37 @@ login.addEventListener("submit", event => {
         event.target.username.value = "No user with that name"
     }
 })
+
+const addMovie = (event) => {
+    if(event.target.matches('button')){
+        let movieId = event.target.closest(".selectedMov").dataset.movieId
+        if(event.target.className === 'watched-button'){
+            console.log("watched")
+            postUserMovie(userId, movieId, true)
+        } else if(event.target.className === 'want-button'){
+            console.log("want to watch")
+            postUserMovie(userId, movieId, false)
+        }
+    }
+}
+
+const postUserMovie = (userId, movieId, boolean) => {
+    fetch(`http://localhost:3000/user_movies`, {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            user_id: userId,
+            movie_id: movieId,
+            watched: boolean
+        })
+    })
+        .then(resp => resp.json())
+        .then(newUserMovieObj => {
+            renderWatchlist(userId)
+        })
+}
 
 
 // Initial fetch for all movies
