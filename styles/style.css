@@ -26,8 +26,8 @@
 /* Page view sections */
 div.card {
     background-color: #eeeeee;
-    height: 150px;
-    width: 250px;
+    /* height: 150px;
+    width: 250px; */
     /* box-shadow: 10px 10px grey; */
     padding: 10px;
     border-radius: 10px;
@@ -35,7 +35,7 @@ div.card {
 
 body {
 margin: 0;
-padding: 0;
+padding: 0; 
 display: grid;
 grid-template-areas: 
     "header header header header"
@@ -76,9 +76,45 @@ main {
     border: 2px solid orange;
 }
 
-/* .movies-container {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    margin: auto 0
-} */
+.poster {
+    display: block;
+    max-width:230px;
+    max-height:95px;
+    width: auto;
+    height: auto;  
+}
 
+.selectedMov {
+    background-color: lightskyblue;
+    border-color: black;
+    padding: 50px;
+    border-radius: 50px;
+}
 
+.big-poster {
+    display: block;
+    max-width: 800px;
+    max-height: 800px;
+    width: auto;
+    height: auto; 
+}
+
+.back-button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    float: right;
+  }
+
+/*  
+    display: block;
+    max-width:230px;
+    max-height:95px;
+    width: auto;
+    height: auto; 
+*/
