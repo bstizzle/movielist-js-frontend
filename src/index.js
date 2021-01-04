@@ -1,11 +1,17 @@
 // Global Variables
 const BASE_URL = "http://localhost:3000"
 const MOVIES_URL = `${BASE_URL}/movies`
+let userId = 0;
 
 let allMovies = []
+let allUsers = []
+let allUserMovies = []
 
 // DOM Elements
 const main = document.querySelector("main")
+const login = document.querySelector(".login")
+const watchlist = document.querySelector(".watchlist")
+const watchUl = document.querySelector(".watchUl")
 
 //******  Functions  ******//
 
@@ -60,6 +66,18 @@ const renderSelectedMovie = (movieId) => {
     main.append(movieDiv)
 }
 
+const renderWatchlist = (userId) => {
+    fetch(`http://localhost:3000/users/${userId}`)
+        .then(resp => resp.json())
+        .then(user => {
+            user.movies.forEach(element => {
+                let li = document.createElement("li")
+                li.innerText = element.title
+                watchUl.append(li)
+            })
+        })
+}
+
 
 //******  Event Listeners  ******//
 
@@ -80,7 +98,21 @@ main.addEventListener('click', event => {
     
 })
 
-
+login.addEventListener("submit", event => {
+    event.preventDefault()
+    //console.log(event.target)
+    let user = event.target.username.value
+    allUsers.forEach(element => {
+        if(element.username === user){
+            console.log(element.id)
+            userId = element.id
+            renderWatchlist(userId)
+        }
+    })
+    if(userId === 0){
+        event.target.username.value = "No user with that name"
+    }
+})
 
 
 // Initial fetch for all movies
@@ -94,7 +126,27 @@ const fetchMovies = () => {
         })
 }
 
+const fetchUsers = () => {
+    fetch("http://localhost:3000/users")
+        .then(response => response.json())
+        .then(usersArray => {
+            console.log(usersArray)
+            allUsers = usersArray
+        } )
+}
+
+const fetchUserMovies = () => {
+    fetch("http://localhost:3000/user_movies")
+        .then(response => response.json())
+        .then(userMoviesArray => {
+            console.log(userMoviesArray)
+            allUserMovies = userMoviesArray
+        } )
+}
+
 fetchMovies();
+fetchUsers();
+fetchUserMovies();
 
 //IF statement
 //if clicking on a movie from index, overwright with just the selected movie

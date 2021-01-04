@@ -100,7 +100,7 @@ main {
 }
 
 .back-button {
-    background-color: #4CAF50; /* Green */
+    background-color: red;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -110,6 +110,17 @@ main {
     font-size: 16px;
     float: right;
   }
+
+.login-button {
+    background-color: green;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
 
 /*  
     display: block;
