@@ -146,6 +146,14 @@ main {
     float: left;
 }
 
+.login {
+    float: left;
+}
+
+#movie-search-form {
+    float: right;
+}
+
 /*  
     display: block;
     max-width:230px;

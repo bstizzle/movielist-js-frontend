@@ -13,6 +13,7 @@ const login = document.querySelector(".login")
 const watchlist = document.querySelector(".watchlist")
 const unwatched = document.querySelector(".unwatched")
 const watched = document.querySelector(".watched")
+const searchForm = document.querySelector("#movie-search-input")
 
 //******  Functions  ******//
 
@@ -148,6 +149,19 @@ const removeMovie = (event) => {
         })
 }
 
+searchForm.addEventListener('keyup', event => {
+    event.preventDefault()
+    main.innerHTML = ''
+    let searchString = event.target.value.toLowerCase()
+    //console.log(searchString)
+    let movieArray = allMovies.filter(movie => movie.title.toLowerCase().includes(searchString))
+    console.log(movieArray)
+    movieArray.forEach(movie => {
+        renderMovieCard(movie)
+    })
+    
+})
+
 //******  Event Listeners  ******//
 
 main.addEventListener('click', event => {
@@ -255,7 +269,7 @@ const fetchUsers = () => {
     fetch("http://localhost:3000/users")
         .then(response => response.json())
         .then(usersArray => {
-            console.log(usersArray)
+            //console.log(usersArray)
             allUsers = usersArray
         })
 }
@@ -264,7 +278,7 @@ const fetchUserMovies = () => {
     fetch("http://localhost:3000/user_movies")
         .then(response => response.json())
         .then(userMoviesArray => {
-            console.log(userMoviesArray)
+            //console.log(userMoviesArray)
             allUserMovies = userMoviesArray
         })
 }
