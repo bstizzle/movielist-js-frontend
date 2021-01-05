@@ -19,21 +19,6 @@ const searchForm = document.querySelector("#movie-search-input")
 
 const renderMovieCard = (movieObj) => {
     console.log(movieObj)
-    // let cardDiv = document.createElement("div")
-    //     cardDiv.classList.add("card")
-    //     cardDiv.dataset.movieId = movieObj.id
-    //     cardDiv.dataset.userId = 1 //will be set by cookie when user logs in
-    // let img = document.createElement("img")
-    //     img.className = 'poster'
-    //     img.src = movieObj.image
-    // let head = document.createElement('h3')
-    //     head.textContent = movieObj.title
-    // let genreDiv = document.createElement("div")
-    //     genreDiv.textContent = movieObj.genre
-    // let yearDiv = document.createElement("div")
-    //     yearDiv.textContent = movieObj.year
-
-    // cardDiv.append(img, head, genreDiv, yearDiv)
     let cardDiv = document.createElement("div")
         cardDiv.classList.add("card")
         cardDiv.dataset.movieId = movieObj.id
@@ -50,12 +35,14 @@ const renderSelectedMovie = (movieId) => {
     let movie = allMovies.find(movie => movie.id === parseInt(movieId, 10))
 
     console.log(movie)
+    let emptyDiv1 = document.createElement("div")
+        emptyDiv1.className = "empty"
+    let emptyDiv2 = document.createElement("div")
+        emptyDiv2.className = "empty"
 
     let movieDiv = document.createElement("div")
-        movieDiv.className = ("selectedMov")
+        movieDiv.className = "selectedMov"
         movieDiv.dataset.movieId = movieId
-    let header = document.createElement("h1")
-        header.textContent = movie.title
     let img = document.createElement("img")
         img.src = movie.image
         img.className = "big-poster"
@@ -70,7 +57,7 @@ const renderSelectedMovie = (movieId) => {
         liGenre.textContent = movie.genre
     let backButton = document.createElement("button")
         backButton.className = 'back-button'
-        backButton.textContent = "Back"
+        backButton.textContent = "<"
     let buttonDiv = document.createElement("div")
         buttonDiv.className = "button-div"
     let watchedButton = document.createElement("button")
@@ -83,8 +70,8 @@ const renderSelectedMovie = (movieId) => {
 
     ul.append(liDesc, liYear, liGenre)
     buttonDiv.append(watchedButton, wantButton)
-    movieDiv.append(backButton, header, img, ul, buttonDiv)
-    main.append(movieDiv)
+    movieDiv.append(backButton, img, ul, buttonDiv)
+    main.append(emptyDiv1, movieDiv, emptyDiv2)
 }
 
 const renderWatchlist = (userId) => {

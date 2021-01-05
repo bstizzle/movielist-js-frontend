@@ -39,14 +39,13 @@ body {
     padding: 0; 
     display: grid;
     grid-template-areas: 
-        "header header header header"
-        "nav nav nav nav"
-        "main main watchlist watchlist"
-        "main main watchlist watchlist"
+        "header header"
+        "nav nav"
+        "main watchlist"
         ;
         
-    grid-template-columns: 300px 1fr;
-    grid-template-rows: 80px 1fr;
+    grid-template-columns: 3fr 1fr;
+    /* grid-template-rows: 500px 1fr; */
     row-gap: 10px;
     column-gap: 15px;
 }
@@ -57,23 +56,35 @@ header {
     border: 2px solid red;
 }
 
+h1 {
+    display: inline;
+    margin: 10px;
+    margin-top: 10px;
+}
+
 main {
     grid-area: main;
+    /* text-align: center; */
+    /* display: flex;
+    justify-content: center; */
     border: 2px solid blue;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: auto auto auto;
     grid-template-rows: auto;
     grid-gap: 20px;
     padding-top: 10px;
     padding-bottom: 30px;
     overflow: auto;
-    max-height: 90%;
+    max-height: 100%;
+    max-width: 100%;
+    height: 80vh;
 }
 
 .nav-bar {
     color: white;
     grid-area: nav;
     border: 2px solid green;
+    text-align: center;
 }
 
 .watchlist {
@@ -81,6 +92,7 @@ main {
     display: block;
     color: white;
     border: 2px solid orange;
+    max-height: 100%;
 }
 
 .poster {
@@ -105,18 +117,36 @@ main {
 }
 
 .selectedMov {
-    background-color: lightskyblue;
+    display: inline-block;
+    color: white;
+    background-color: rgb(0, 0, 0);
     border-color: black;
-    padding: 50px;
-    border-radius: 50px;
+    box-shadow: 0px 10px 36px 2px rgba(110,110,110,1);
+    width: 80%;
+    margin: auto;
+    animation-name: load-movie;
+    animation-duration: 1s;
+    position: relative;
+}
+
+@keyframes load-movie {
+    from {transform: scale(0.1)}
+    to {transform: scale(1)}
 }
 
 .big-poster {
     display: block;
-    max-width: 800px;
-    max-height: 800px;
+    max-width: 50%;
+    max-height: 50%;
     width: auto;
-    height: auto; 
+    height: auto;
+    float: left;
+    padding: 10px;
+}
+
+.empty {
+    width: 0px;
+    height: 0px;
 }
 
 .back-button {
@@ -128,11 +158,14 @@ main {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    float: right;
-  }
+    margin: 10px;
+    position: absolute;
+    left: 10px;
+    top: 5px;
+}
 
 .login-button {
-    background-color: green;
+    background-color: rgb(30, 112, 30);
     border: none;
     color: white;
     padding: 15px 32px;
@@ -152,6 +185,7 @@ main {
     display: inline-block;
     font-size: 16px;
     float: right;
+    margin: 10px;
 }
 
 .want-button {
@@ -164,14 +198,26 @@ main {
     display: inline-block;
     font-size: 16px;
     float: left;
+    margin: 10px;
 }
 
 .login {
-    float: left;
+    float: right;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #movie-search-form {
-    float: right;
+    float: left;
+}
+
+.movie-info {
+
 }
 
 /*  
