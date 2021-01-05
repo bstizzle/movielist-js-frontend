@@ -19,21 +19,29 @@ const searchForm = document.querySelector("#movie-search-input")
 
 const renderMovieCard = (movieObj) => {
     console.log(movieObj)
+    // let cardDiv = document.createElement("div")
+    //     cardDiv.classList.add("card")
+    //     cardDiv.dataset.movieId = movieObj.id
+    //     cardDiv.dataset.userId = 1 //will be set by cookie when user logs in
+    // let img = document.createElement("img")
+    //     img.className = 'poster'
+    //     img.src = movieObj.image
+    // let head = document.createElement('h3')
+    //     head.textContent = movieObj.title
+    // let genreDiv = document.createElement("div")
+    //     genreDiv.textContent = movieObj.genre
+    // let yearDiv = document.createElement("div")
+    //     yearDiv.textContent = movieObj.year
+
+    // cardDiv.append(img, head, genreDiv, yearDiv)
     let cardDiv = document.createElement("div")
         cardDiv.classList.add("card")
         cardDiv.dataset.movieId = movieObj.id
-        cardDiv.dataset.userId = 1 //will be set by cookie when user logs in
     let img = document.createElement("img")
         img.className = 'poster'
         img.src = movieObj.image
-    let head = document.createElement('h3')
-        head.textContent = movieObj.title
-    let genreDiv = document.createElement("div")
-        genreDiv.textContent = movieObj.genre
-    let yearDiv = document.createElement("div")
-        yearDiv.textContent = movieObj.year
 
-    cardDiv.append(img, head, genreDiv, yearDiv)
+    cardDiv.append(img)
     main.append(cardDiv)
 }
 
@@ -166,16 +174,19 @@ searchForm.addEventListener('keyup', event => {
 
 main.addEventListener('click', event => {
     let target = event.target
-    if(target.className === 'card'){
+    console.log(target.parentElement.className)
+    if(target.parentElement.className === 'card'){
         console.log(target.dataset.movieId)
-        let movieId = target.dataset.movieId
-        main.innerHTML = ''
-        renderSelectedMovie(movieId)
+        let movieId = target.parentElement.dataset.movieId
+        setTimeout(function(){
+            main.innerHTML = ''
+            renderSelectedMovie(movieId)
+        }, 50)
 
     } else if(target.className === 'back-button') {
         console.log(target)
         main.innerHTML = ''
-        fetchMovies();
+        allMovies.forEach(movie => renderMovieCard(movie))
     }
     
     
