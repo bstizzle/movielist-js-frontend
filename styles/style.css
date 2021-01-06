@@ -113,6 +113,11 @@ main {
     max-height: 100%;
 }
 
+.watchlist li {
+    font-family: 'Mina', sans-serif;
+    font-size: 20px; 
+}
+
 .poster {
     display: block;
     max-width: 100%;
