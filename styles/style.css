@@ -178,7 +178,89 @@ main {
     height: 0px;
 }
 
-.back-button {
+.login-button {
+    box-shadow: 0px 1px 0px 0px #fff6af;
+	background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+	background-color:#ffec64;
+	border-radius:6px;
+	border:1px solid #ffaa22;
+	display:inline-block;
+	cursor:pointer;
+	color:#333333;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+    text-shadow:0px 1px 0px #ffee66;
+    margin: 10px;
+}
+
+.login-button:hover {
+    background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+	background-color:#ffab23;
+}
+
+.login-button:active {
+	position:relative;
+	top:1px;
+}
+
+button {
+    box-shadow: 0px 1px 0px 0px #fff6af;
+	background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+	background-color:#ffec64;
+	border-radius:6px;
+	border:1px solid #ffaa22;
+	display:inline-block;
+	cursor:pointer;
+	color:#333333;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+    text-shadow:0px 1px 0px #ffee66;
+    margin: 10px;
+}
+
+button:hover {
+    background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+	background-color:#ffab23;
+}
+
+button:active {
+	position:relative;
+	top:1px;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.search-div {
+    float: left;
+    /* display:inline-block; */
+    margin-top: 12px;
+}
+
+.login-div {
+    float: right;
+    /* display:inline-block; */
+    margin-top: 12px;
+}
+
+.header-div {
+    float: none;
+    display: inline-block;
+}
+
+/* OLD BUTTON CODE, MIGHT NEED TO UNCOMMENT */
+/* .back-button {
     background-color: red;
     border: none;
     color: white;
@@ -192,46 +274,9 @@ main {
     left: 10px;
     top: 5px;
     border-radius: 200px 200px 200px 200px;
-}
+} */
 
-.login-button {
-    background-color: rgb(30, 112, 30);
-    border: none;
-    color: white;
-    padding: 0px 8px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-}
-
-.watched-button {
-    background-color: yellow;
-    border: none;
-    color: black;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    float: right;
-    margin: 10px;
-}
-
-.want-button {
-    background-color: yellow;
-    border: none;
-    color: black;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    float: left;
-    margin: 10px;
-}
-
-.edit-btn {
+/* .edit-btn {
 	box-shadow: 0px 1px 0px 0px #fff6af;
 	background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
 	background-color:#ffec64;
@@ -281,54 +326,30 @@ main {
 .delete-btn:active {
 	position:relative;
 	top:1px;
-}
-
-
-/* .login {
-    float: right;
 } */
 
-form {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-
-}
-
-/* #movie-search-form {
-
-    float: left;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-} */
-
-.search-div {
-    float: left;
-    /* display:inline-block; */
-    margin-top: 12px;
-}
-
-.login-div {
-    float: right;
-    /* display:inline-block; */
-    margin-top: 12px;
-}
-
-.header-div {
-    float: none;
+/* .watched-button {
+    background-color: yellow;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
     display: inline-block;
+    font-size: 16px;
+    float: right;
+    margin: 10px;
 }
-/* 
-.movie-info {
 
+.want-button {
+    background-color: yellow;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    float: left;
+    margin: 10px;
 } */
-
-/*  
-    display: block;
-    max-width:230px;
-    max-height:95px;
-    width: auto;
-    height: auto; 
-*/
