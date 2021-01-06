@@ -15,6 +15,7 @@ const unwatched = document.querySelector(".unwatched")
 const watched = document.querySelector(".watched")
 const searchForm = document.querySelector("#movie-search-input")
 
+
 //******  Functions  ******//
 const boolSwitch = (event) => {
     console.log(event.target)
@@ -43,20 +44,38 @@ const removeMovie = (event) => {
             }
     })
         .then(resp => resp.json())
-        .then(newUserMovieObj => {
+        .then(json => {
+            counter = 0
+            allUserMovies.forEach(userMovie => {
+                if(userMovie.id === json.id){
+                    // console.log(userMovie.id)
+                    // console.log(json.id)
+                    let index = allUserMovies.indexOf(userMovie)
+                    allUserMovies.splice(index)
+                }
+            })
             renderWatchlist(userId)
         })
 }
+
 const addMovie = (event) => {
     if(event.target.matches('button')){
         let movieId = event.target.closest(".selectedMov").dataset.movieId
-        if(event.target.className === 'watched-button'){
-            console.log("watched")
-            postUserMovie(userId, movieId, true)
-        } else if(event.target.className === 'want-button'){
-            console.log("want to watch")
-            postUserMovie(userId, movieId, false)
+        let filter = allUserMovies.filter(user_movie => user_movie.user_id === userId)
+        let secondFilter = filter.find(user_movie => user_movie.movie_id === parseInt(movieId))
+        if(secondFilter !== undefined) {
+            console.log(secondFilter)
+            console.log("found match")
+        } else {
+            if(event.target.className === 'watched-button'){
+                console.log("watched")
+                postUserMovie(userId, movieId, true)
+            } else if(event.target.className === 'want-button'){
+                console.log("want to watch")
+                postUserMovie(userId, movieId, false)
+            }
         }
+        
     }
 }
 
@@ -73,8 +92,27 @@ const postUserMovie = (userId, movieId, boolean) => {
         })
     })
         .then(resp => resp.json())
-        .then(newUserMovieObj => {
+        .then(json => {
+            allUserMovies.push(json)
             renderWatchlist(userId)
+        })
+}
+
+const patchReview = (userMovieId, reviewText) => {
+    fetch(`http://localhost:3000/user_movies/${userMovieId}`, {
+        method: 'PATCH',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            review: reviewText
+        })
+    })
+        .then(resp => resp.json())
+        .then(data => {
+            fetchUserMovies()
+        }).then(data => {
+            renderReviews()
         })
 }
 
@@ -94,19 +132,20 @@ searchForm.addEventListener('keyup', event => {
 
 main.addEventListener('click', event => {
     let target = event.target
-    console.log(target.parentElement.className)
-    if(target.parentElement.className === 'card'){
-        console.log(target.dataset.movieId)
-        let movieId = target.parentElement.dataset.movieId
-        setTimeout(function(){
-            main.innerHTML = ''
-            renderSelectedMovie(movieId)
-        }, 50)
+    if(target.parentElement) {
+        if(target.parentElement.className === 'card'){
+            console.log(target.dataset.movieId)
+            let movieId = target.parentElement.dataset.movieId
+            setTimeout(function(){
+                main.innerHTML = ''
+                renderSelectedMovie(movieId)
+            }, 50)
 
-    } else if(target.className === 'back-button') {
-        console.log(target)
-        main.innerHTML = ''
-        allMovies.forEach(movie => renderMovieCard(movie))
+        } else if(target.className === 'back-button') {
+            console.log(target)
+            main.innerHTML = ''
+            allMovies.forEach(movie => renderMovieCard(movie))
+        }
     }
 })
 
@@ -151,13 +190,20 @@ login.addEventListener("submit", event => {
     }
 })
 
+watched.addEventListener("click", event => {
+    let userMovieId = event.target.parentElement.dataset.userMovieId
+    if (event.target.matches("button")) {
+        renderReviewForm(userMovieId)
+    }
+})
+
 // Initial fetch for all movies
 const fetchMovies = () => {
     fetch("http://localhost:3000/movies")
         .then(response => response.json())
         .then(moviesArray => {
             allMovies = moviesArray
-            console.log(moviesArray)
+            // console.log(moviesArray)
             moviesArray.forEach(movie => renderMovieCard(movie))
         })
 }
