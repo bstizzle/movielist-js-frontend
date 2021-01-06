@@ -57,7 +57,8 @@ const renderSelectedMovie = (movieId) => {
         liGenre.textContent = movie.genre
     let backButton = document.createElement("button")
         backButton.className = 'back-button'
-        backButton.textContent = "<"
+        backButton.textContent = "⬅"
+        backButton.style.fontSize = "x-large"
     let buttonDiv = document.createElement("div")
         buttonDiv.className = "button-div"
     let watchedButton = document.createElement("button")
@@ -92,13 +93,14 @@ const renderWatchlist = (userId) => {
                 if(element.watched === true){
                     watched.append(li)
                 } else {
+                    let br = document.createElement("br")
                     let btn = document.createElement("button")
                         btn.innerText = 'Watched'
                         btn.className = 'edit-btn'
                     let removeBtn = document.createElement("button")
                         removeBtn.textContent = "Remove"
                         removeBtn.className = 'delete-btn'
-                    li.append(btn, removeBtn)
+                    li.append(br, btn, removeBtn)
                     unwatched.append(li)
                     li.addEventListener('click', event => {
                         if(event.target.matches('.edit-btn')){
@@ -280,6 +282,7 @@ const fetchUserMovies = () => {
             allUserMovies = userMoviesArray
         })
 }
+
 
 fetchMovies();
 fetchUsers();
