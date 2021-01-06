@@ -74,6 +74,10 @@ const renderWatchlist = (userId) => {
                 })
 
                 if(element.watched === true){
+                    let reviewBtn = document.createElement("button")
+                        reviewBtn.textContent = "Review"
+                        reviewBtn.className = 'review-btn'
+                    li.append(reviewBtn)
                     watched.append(li)
                 } else {
                     let br = document.createElement("br")
