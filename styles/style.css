@@ -68,6 +68,11 @@ h1 {
     display: inline;
     margin: 10px;
     margin-top: 10px;
+    font-weight: normal;
+}
+
+h4 {
+    font-weight: normal;
 }
 
 main {
@@ -302,7 +307,7 @@ form {
 
 .header-div {
     float: none;
-    display:inline-block;
+    display: inline-block;
 }
 /* 
 .movie-info {
