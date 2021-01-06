@@ -24,6 +24,11 @@
 /* -------------------------------- */
 
 /* Page view sections */
+@font-face {
+    font-family: headerFont;
+    src: url(../fonts/parklane.ttf);
+}
+
 div.card {
     /* height: 150px;
     width: 250px; */
@@ -33,8 +38,8 @@ div.card {
 }
 
 body {
-    background: #000000 url(../images/background.jpg) repeat-y center top;
-    background-size: contain;
+    background: #000000 url(../images/background.jpg) no-repeat center top;
+    background-size: cover;
     margin: 0;
     padding: 0; 
     display: grid;
@@ -48,6 +53,9 @@ body {
     /* grid-template-rows: 500px 1fr; */
     row-gap: 10px;
     column-gap: 15px;
+
+    font-family: headerFont;
+    font-size: 30px;
 }
 
 header {
@@ -78,6 +86,9 @@ main {
     max-height: 100%;
     max-width: 100%;
     height: 80vh;
+
+    font-family: 'Mina', sans-serif;
+    font-size: 20px;
 }
 
 .nav-bar {
