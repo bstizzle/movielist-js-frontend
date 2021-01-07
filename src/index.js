@@ -66,6 +66,7 @@ const addMovie = (event) => {
         if(secondFilter !== undefined) {
             console.log(secondFilter)
             console.log("found match")
+            alert("This movie is already on your list!")
         } else {
             if(event.target.className === 'watched-button'){
                 console.log("watched")
@@ -98,14 +99,15 @@ const postUserMovie = (userId, movieId, boolean) => {
         })
 }
 
-const patchReview = (userMovieId, reviewText) => {
+const patchReview = (userMovieId, reviewText, reviewRating) => {
     fetch(`http://localhost:3000/user_movies/${userMovieId}`, {
         method: 'PATCH',
         headers: {
         'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            review: reviewText
+            review: reviewText,
+            rating: reviewRating
         })
     })
         .then(resp => resp.json())

@@ -294,6 +294,15 @@ textarea {
     float: right;
 }
 
+.review-head {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.review-body {
+    font-size: 18px;
+}
+
 /* OLD BUTTON CODE, MIGHT NEED TO UNCOMMENT */
 /* .back-button {
     background-color: red;

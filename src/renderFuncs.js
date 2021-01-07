@@ -123,15 +123,25 @@ const renderReviewForm = (userMovieId) => {
         <label for="review">Review:</label><br>
         <textarea id="review" name="review">${userMovieObj.review}</textarea>
         <br>
+        <label for="rating">Your Rating:</label>
+        <select name="rating" id="rating" form="review">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <br>
         <input class="login-button" type="submit" value="Submit">
     `
     movie.append(form)
 
     form.addEventListener("submit", event => {
         event.preventDefault()
+        let rating = document.getElementById("rating").value
         let text = event.target.review.value
         console.log(text)
-        patchReview(userMovieId, text)
+        patchReview(userMovieId, text, rating)
     })
 }
 
@@ -167,7 +177,16 @@ const renderReviews = () => {
 const renderRev = (userMovie, reviewUl) => {
     if(userMovie.watched === true) {
         let reviewLi = document.createElement("li")
-        reviewLi.innerText = userMovie.review
+        let stars = ""
+        let i = 0
+        for (i = 0; i < userMovie.rating; i++) {
+            stars += "&#11088;"
+        }
+        //for rating size, add "&#11088;" + " " that many times
+        reviewLi.innerHTML = `
+            <div class='review-head'>${userMovie.user.username[0].toUpperCase() + userMovie.user.username.slice(1)} - Rating: ${stars}</div>
+            <div class='review-body'>${userMovie.review}</div>
+        `
         reviewUl.append(reviewLi)
     }
 }
