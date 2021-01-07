@@ -182,13 +182,21 @@ login.addEventListener("submit", event => {
                     renderWatchlist(userId)
                 })
         }
-        lgnBtn.value = "Logout"
+        login.innerHTML = `
+            <label>Welcome, ${login.username.value}</label><br>
+            <input class="login-button" type="submit" value="Logout">
+        `
+        // lgnBtn.value = "Logout"
     } else if(lgnBtn.value === "Logout") {
         userId = 0
         alert("Logged Out!")
         unwatched.innerHTML = ''
         watched.innerHTML = ''
-        lgnBtn.value = "Login"
+        login.innerHTML = `
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username"><br>
+            <input class="login-button" type="submit" value="Login">
+        `
     }
 })
 
@@ -198,6 +206,8 @@ watched.addEventListener("click", event => {
         renderReviewForm(userMovieId)
     }
 })
+
+
 
 // Initial fetch for all movies
 const fetchMovies = () => {

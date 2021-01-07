@@ -55,12 +55,20 @@ const renderSelectedMovie = (movieId) => {
     let reviewButton = document.createElement("button")
         reviewButton.className = "review-button"
         reviewButton.textContent = "See Reviews"
+    let trailerButton = document.createElement("button")
+        trailerButton.className = "trailer-button"
+        trailerButton.textContent = "Watch Trailer"
+
+    
     buttonDiv.addEventListener("click", addMovie)
     reviewButton.addEventListener("click", renderReviews)
+    trailerButton.addEventListener("click", event => {
+        renderModal(movie.trailer)
+    })
 
     ul.append(liDesc, liYear, liGenre)
     buttonDiv.append(watchedButton, wantButton)
-    movieDiv.append(backButton, reviewButton, img, ul, buttonDiv)
+    movieDiv.append(backButton, reviewButton, trailerButton, img, ul, buttonDiv)
     main.append(emptyDiv1, movieDiv, emptyDiv2)
 }
 
@@ -182,11 +190,32 @@ const renderRev = (userMovie, reviewUl) => {
         for (i = 0; i < userMovie.rating; i++) {
             stars += "&#11088;"
         }
-        //for rating size, add "&#11088;" + " " that many times
         reviewLi.innerHTML = `
             <div class='review-head'>${userMovie.user.username[0].toUpperCase() + userMovie.user.username.slice(1)} - Rating: ${stars}</div>
             <div class='review-body'>${userMovie.review}</div>
         `
         reviewUl.append(reviewLi)
+    }
+}
+
+const renderModal = (movieTrailer) => {
+    let modalDiv = document.createElement("div")
+        modalDiv.className = "modal-div"
+    let modalContent = document.createElement("div")
+        modalContent.className = "modal-content"
+
+    modalContent.innerHTML = `
+        <iframe width="100%" height="100%" src="${movieTrailer}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    `
+
+    modalDiv.append(modalContent)
+    main.append(modalDiv)
+
+    modalDiv.style.display = "block"
+
+    window.onclick = function(event) {
+        if (event.target == modalDiv) {
+          modalDiv.remove();
+        }
     }
 }
