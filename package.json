@@ -2,7 +2,7 @@
   "name": "ben-portfolio",
   "version": "1.0.0",
   "engines": {
-    "node": "15.x"
+    "node": "15.0.1"
   },
   "description": "",
   "main": "index.home",
