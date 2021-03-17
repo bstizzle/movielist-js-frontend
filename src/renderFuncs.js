@@ -1,4 +1,5 @@
 //all html rendering functions go here
+const HOST_URL = "https://flix-fix-backend.herokuapp.com"
 
 const renderMovieCard = (movieObj) => {
     console.log(movieObj)
@@ -73,7 +74,7 @@ const renderSelectedMovie = (movieId) => {
 }
 
 const renderWatchlist = (userId) => {
-    fetch(`http://localhost:3000/users/${userId}`)
+    fetch(`${HOST_URL}/users/${userId}`)
         .then(resp => resp.json())
         .then(user => {
             watched.innerHTML = ''
@@ -171,7 +172,7 @@ const renderReviews = () => {
     }
 
     let movieId = movie.dataset.movieId
-    fetch(`http://localhost:3000/user_movies`)
+    fetch(`${HOST_URL}/user_movies`)
         .then(resp => resp.json())
         .then(userMovies => {
             let matchedUserMovies = userMovies.filter(userMovie => userMovie.movie_id === parseInt(movieId, 10))

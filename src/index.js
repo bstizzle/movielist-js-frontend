@@ -1,6 +1,7 @@
 // Global Variables
-const BASE_URL = "http://localhost:3000"
-const MOVIES_URL = `${BASE_URL}/movies`
+// const BASE_URL = "http://localhost:3000"
+// const HOST_URL = "https://movielist-js-backend.herokuapp.com"
+// const MOVIES_URL = `${BASE_URL}/movies`
 let userId = 0;
 
 let allMovies = []
@@ -20,7 +21,7 @@ const searchForm = document.querySelector("#movie-search-input")
 const boolSwitch = (event) => {
     console.log(event.target)
     let id = event.target.parentElement.dataset.userMovieId
-    fetch(`http://localhost:3000/user_movies/${id}`, {
+    fetch(`${HOST_URL}/user_movies/${id}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -37,7 +38,7 @@ const boolSwitch = (event) => {
 
 const removeMovie = (event) => {
     let id = event.target.parentElement.dataset.userMovieId
-    fetch(`http://localhost:3000/user_movies/${id}`, {
+    fetch(`${HOST_URL}/user_movies/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -81,7 +82,7 @@ const addMovie = (event) => {
 }
 
 const postUserMovie = (userId, movieId, boolean) => {
-    fetch(`http://localhost:3000/user_movies`, {
+    fetch(`${HOST_URL}/user_movies`, {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',
@@ -100,7 +101,7 @@ const postUserMovie = (userId, movieId, boolean) => {
 }
 
 const patchReview = (userMovieId, reviewText, reviewRating) => {
-    fetch(`http://localhost:3000/user_movies/${userMovieId}`, {
+    fetch(`${HOST_URL}/user_movies/${userMovieId}`, {
         method: 'PATCH',
         headers: {
         'Content-Type': 'application/json',
@@ -166,7 +167,7 @@ login.addEventListener("submit", event => {
             }
         })
         if(userId === 0){
-            fetch(`http://localhost:3000/users`, {
+            fetch(`${HOST_URL}/users`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -211,7 +212,7 @@ watched.addEventListener("click", event => {
 
 // Initial fetch for all movies
 const fetchMovies = () => {
-    fetch("http://localhost:3000/movies")
+    fetch(`${HOST_URL}/movies`)
         .then(response => response.json())
         .then(moviesArray => {
             allMovies = moviesArray
@@ -221,7 +222,7 @@ const fetchMovies = () => {
 }
 
 const fetchUsers = () => {
-    fetch("http://localhost:3000/users")
+    fetch(`${HOST_URL}/users`)
         .then(response => response.json())
         .then(usersArray => {
             //console.log(usersArray)
@@ -230,7 +231,7 @@ const fetchUsers = () => {
 }
 
 const fetchUserMovies = () => {
-    fetch("http://localhost:3000/user_movies")
+    fetch(`${HOST_URL}/user_movies`)
         .then(response => response.json())
         .then(userMoviesArray => {
             //console.log(userMoviesArray)
