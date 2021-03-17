@@ -1,0 +1,14 @@
+{
+  "name": "ben-portfolio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.home",
+  "scripts": {
+    "dev": "dev",
+    "build": "build",
+    "start": "start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
