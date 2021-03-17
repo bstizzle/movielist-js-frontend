@@ -1,17 +1,19 @@
 {
   "name": "movielist-js-frontend",
   "version": "1.0.0",
-  "engines": {
-    "node": "15.0.1"
-  },
-  "description": "",
-  "main": "index.html",
+  "description": "An app where you can search and view info about movies, as well as watch trailers and read reviews, and then maintain a watchlist. The watch list has both to-watch and has-watched columns.",
+  "main": "index.js",
   "scripts": {
-    "dev": "dev",
-    "build": "build",
-    "start": "start"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bstizzle/movielist-js-frontend.git"
+  },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bstizzle/movielist-js-frontend/issues"
+  },
+  "homepage": "https://github.com/bstizzle/movielist-js-frontend#readme"
 }
