@@ -2,9 +2,8 @@
   "name": "movielist-js-frontend",
   "version": "1.0.0",
   "description": "An app where you can search and view info about movies, as well as watch trailers and read reviews, and then maintain a watchlist. The watch list has both to-watch and has-watched columns.",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
-    "start": "explorer.exe index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
