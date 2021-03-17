@@ -1,11 +1,11 @@
 {
-  "name": "ben-portfolio",
+  "name": "movielist-js-frontend",
   "version": "1.0.0",
   "engines": {
     "node": "15.0.1"
   },
   "description": "",
-  "main": "index.home",
+  "main": "index.html",
   "scripts": {
     "dev": "dev",
     "build": "build",
